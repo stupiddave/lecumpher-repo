@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Aug 26 09:10:14 BST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0148-115d-8135-0000019a2f18 
+on database directory /home/dave/workspace/FantasyFootball/FF_DB with class loader sun.misc.Launcher$AppClassLoader@1d16e93 
+Loaded from file:/home/dave/apache/db-derby-10.10.2.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_11-b12
+user.dir=/home/dave/workspace/FantasyFootball
+os.name=Linux
+os.arch=i386
+os.version=3.13.0-32-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
