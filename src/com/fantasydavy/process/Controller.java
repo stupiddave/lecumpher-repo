@@ -38,7 +38,7 @@ public class Controller {
 			processor.sendWeeklyTeamEmail(isFinal);
 //			processor.updateTeamWebPage();
 			processor.publishTableToWeb();
-			processor.uploadInfoToDropbox();
+//			processor.uploadInfoToDropbox();
 		} else if ("testEmail".equals(args[0])) {
 			EmailHandler emailHandler = new GmailHandler();
 			emailHandler.sendEmail("Fantasy test yo", null);
