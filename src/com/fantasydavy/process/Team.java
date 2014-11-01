@@ -12,7 +12,6 @@ public class Team {
 	private int gameweekPoints;
 	private int ownerId;
 	private String ownerName;
-	// private ArrayList<Player> subs;
 	private String teamName;
 	private ArrayList<Player> teamsheet;
 	private int totalPoints;
@@ -23,6 +22,7 @@ public class Team {
 	private Player selectedCaptain;
 	private Player selectedViceCaptain;
 	private Player actualCaptain;
+	private int wpPostId;
 
 	public Player getActualCaptain() {
 		return actualCaptain;
@@ -180,10 +180,6 @@ public class Team {
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
 	}
-
-	// public void setSubs(ArrayList<Player> subs) {
-	// this.subs = subs;
-	// }
 
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
@@ -366,5 +362,13 @@ public class Team {
 		}
 		sb.append("</table><!-- end of player score table playerscoring -->");
 		return sb.toString();
+	}
+
+	public int getWpPostId() {
+		return wpPostId;
+	}
+
+	public void setWpPostId(int wpPostId) {
+		this.wpPostId = wpPostId;
 	}
 }

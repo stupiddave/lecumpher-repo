@@ -6,11 +6,9 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,17 +25,19 @@ public class Controller {
 		} else if ("setupDropbox".equals(args[0])) {
 
 		} else if ("doWeeklyScoring".equals(args[0])) {
+			boolean isFinal = false;
 			Processor processor = new Processor();
 			processor.doWeeklyScoring();
 			
 			if (args.length > 1 && "final".equals(args[1])) {
+				isFinal = true;
 				System.out.println("This is the finalised scoring.");
 				processor.finaliseWeeklyScores();
 			}
 			processor.createStandingsTable();
-//			processor.sendWeeklyTeamEmail();
-			processor.updateTeamWebPage();
-//			processor.publishTableToWeb();
+			processor.sendWeeklyTeamEmail(isFinal);
+//			processor.updateTeamWebPage();
+			processor.publishTableToWeb();
 			processor.uploadInfoToDropbox();
 		} else if ("testEmail".equals(args[0])) {
 			EmailHandler emailHandler = new GmailHandler();

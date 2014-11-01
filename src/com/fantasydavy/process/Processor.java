@@ -53,9 +53,10 @@ public class Processor {
 			int position = teams.indexOf(team) + 1;
 			sb.append("<tr><td>" + position
 					+ "</td><td><a href=\"http://petehuey.com/hfl/"
-					+ team.getTeamName().replace(" ", "-").replace("'", "") + "/\">"
-					+ team.getTeamName() + "</a></td><td>" + team.getOwnerName()
-					+ "</td><td>" + team.getGameweekPoints() + "</td><td>"
+					+ team.getTeamName().replace(" ", "-").replace("'", "")
+					+ "/\">" + team.getTeamName() + "</a></td><td>"
+					+ team.getOwnerName() + "</td><td>"
+					+ team.getGameweekPoints() + "</td><td>"
 					+ team.getTotalPoints() + "</td></tr>");
 		}
 		sb.append("</table>");
@@ -98,8 +99,8 @@ public class Processor {
 		ArrayList<Player> players = new ArrayList<Player>();
 		try {
 			String[] teamsheet = il.parseTeamsheet(team.getOwnerId());
-		for (int i = 0; i < teamsheet.length; i++) {
-			Player player = new Player();
+			for (int i = 0; i < teamsheet.length; i++) {
+				Player player = new Player();
 				if (teamsheet[i].contains("vc")) {
 					player.setViceCaptain(true);
 					player.setPlayerId(Integer.parseInt(teamsheet[i].replace(
@@ -131,7 +132,7 @@ public class Processor {
 				players.add(player);
 				System.out.println("Just added " + player.getCommonName()
 						+ " to " + team.getTeamName());
-		}
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Can't find teamsheet file for owner ID: "
 					+ team);
@@ -252,14 +253,20 @@ public class Processor {
 		return jsonObject;
 	}
 
-	public void sendWeeklyTeamEmail() {
+	public void sendWeeklyTeamEmail(Boolean isFinal) {
 		EmailHandler emailHandler = new GmailHandler();
 		for (Team team : teams) {
 			StringBuilder emailText = new StringBuilder();
 			emailText.append(createInlineStylingForEmail());
 			emailText.append(emailHandler.buildEmailPlayerText(team));
-			emailText
-					.append("<p>Overall standings at the end of this gameweek:</p>");
+			if (isFinal) {
+				emailText
+						.append("<p>Here are the final standings for this gameweek:</p>");
+			} else {
+				emailText
+						.append("<p>Overall standings so far this gameweek:</p>");
+			}
+
 			emailText.append(standingsTable);
 			emailText
 					.append("<p>Find everything you need at the <a href=\"http://petehuey.com/hfl/\">HFL website</a></p>");
@@ -292,7 +299,7 @@ public class Processor {
 
 	public void finaliseWeeklyScores() {
 		for (Team team : teams) {
-			dao.saveTeamScores(team);		
+			dao.saveTeamScores(team);
 		}
 	}
 

@@ -95,11 +95,13 @@ public class GmailHandler implements EmailHandler {
 	@Override
 	public String buildEmailPlayerText(Team team) {
 		StringBuilder sb = new StringBuilder("<p>Hi " + team.getOwnerName()
-				+ ",<br><br> Here was your lineup for this week:</p>");
+				+ ","
+				+ "<br>Here is the lineup for " + team.getTeamName()
+				+ " this week:</p>");
 		sb.append(team.createStartingLineupTableForEmail());
 
 		if (team.getUnplayedStarters().size() > 0) {
-			sb.append("<p>Here are the players who were automatically substituted this week:</p>");
+			sb.append("<p>Here are the players who have been automatically substituted this week:</p>");
 			sb.append("<table id=\"unusedstarters\">");
 			for (Player unplayedStarter : team.getUnplayedStarters()) {
 				sb.append("<tr><td>" + unplayedStarter.getCommonName()
@@ -110,7 +112,8 @@ public class GmailHandler implements EmailHandler {
 		sb.append("<p>Here are your unused subs:</p>");
 		sb.append("<table id=\"unusedsubs\">");
 		for (Player unplayedSub : team.getUnplayedSubs()) {
-			sb.append("<tr><td>" + unplayedSub.getCommonName() + "</td><td>" + unplayedSub.getGameweekTotal() + "</td></tr>");
+			sb.append("<tr><td>" + unplayedSub.getCommonName() + "</td><td>"
+					+ unplayedSub.getGameweekTotal() + "</td></tr>");
 		}
 		sb.append("</table>");
 		return sb.toString();
